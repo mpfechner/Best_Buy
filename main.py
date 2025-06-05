@@ -1,8 +1,15 @@
+from typing import List
 from products import Product
 from store import Store
 
 
-def start(store: Store):
+def start(store: Store) -> None:
+    """
+    Launches the interactive store menu.
+
+    Args:
+        store (Store): The store instance to operate on.
+    """
     while True:
         print_menu()
         choice = input("Please choose a number: ").strip()
@@ -20,7 +27,8 @@ def start(store: Store):
             print("Invalid choice. Please try again.")
 
 
-def print_menu():
+def print_menu() -> None:
+    """Displays the main store menu."""
     print("   Store Menu")
     print("   ----------")
     print("1. List all products in store")
@@ -28,22 +36,43 @@ def print_menu():
     print("3. Make an order")
     print("4. Quit")
 
-def list_products(store: Store):
-    print("\nAvailable products:")
-    for p in store.get_all_products():
-        print(p.show())
 
-def show_total_quantity(store: Store):
+def list_products(store: Store) -> None:
+    """
+    Lists all active products in the store.
+
+    Args:
+        store (Store): The store to list products from.
+    """
+    print("\nAvailable products:")
+    for product in store.get_all_products():
+        print(product.show())
+
+
+def show_total_quantity(store: Store) -> None:
+    """
+    Displays the total quantity of all products in the store.
+
+    Args:
+        store (Store): The store to calculate quantities from.
+    """
     total = store.get_total_quantity()
     print(f"\nTotal quantity in store: {total}")
 
-def make_order(store: Store):
-    shopping_list = []
+
+def make_order(store: Store) -> None:
+    """
+    Handles the order process by prompting the user to select products and quantities.
+
+    Args:
+        store (Store): The store to order from.
+    """
+    shopping_list: List[tuple[Product, int]] = []
     products = store.get_all_products()
 
     print("\nEnter the number of the product and quantity to order.")
-    for i, p in enumerate(products):
-        print(f"{i + 1}. {p.show()}")
+    for i, product in enumerate(products):
+        print(f"{i + 1}. {product.show()}")
 
     while True:
         try:
@@ -66,8 +95,8 @@ def make_order(store: Store):
         print(f"Error placing order: {e}")
 
 
-
-def main():
+def main() -> None:
+    """Creates a sample store and starts the interactive CLI."""
     product_list = [
         Product("MacBook Air M2", 1450, 100),
         Product("Bose QuietComfort Earbuds", 250, 500),
@@ -79,4 +108,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
