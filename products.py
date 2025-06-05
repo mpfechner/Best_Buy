@@ -39,3 +39,4 @@ class Product:
             self.deactivate()
         return self._price * quantity
 
+
