@@ -40,3 +40,19 @@ class Product:
         return self._price * quantity
 
 
+def main():
+    bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
+    mac = Product("MacBook Air M2", price=1450, quantity=100)
+
+    print(bose.buy(50))          # Expect 12500
+    print(mac.buy(100))          # Expect 145000
+    print(mac.is_active())       # Expect False, because stock is now 0
+
+    print(bose.show())           # Expect updated quantity: 450
+    print(mac.show())            # Quantity: 0
+
+    bose.set_quantity(1000)
+    print(bose.show())
+
+if __name__ == "__main__":
+    main()
