@@ -68,7 +68,9 @@ class Store:
         Raises:
             Exception: If a product is inactive or quantity is unavailable.
         """
+        # pylint: disable=R0201
         total = 0.0
         for product, quantity in shopping_list:
             total += product.buy(quantity)
         return total
+

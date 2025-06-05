@@ -85,14 +85,14 @@ def make_order(store: Store) -> None:
                 continue
             quantity = int(input("Quantity: "))
             shopping_list.append((products[index], quantity))
-        except Exception as e:
-            print(f"Invalid input: {e}")
+        except ValueError as input_error:
+            print(f"Invalid input: {input_error}")
 
     try:
         total_price = store.order(shopping_list)
         print(f"\nOrder placed. Total cost: {total_price} dollars.")
-    except Exception as e:
-        print(f"Error placing order: {e}")
+    except Exception as order_error:  # noqa: W0703
+        print(f"Error placing order: {order_error}")
 
 
 def main() -> None:
