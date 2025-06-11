@@ -19,14 +19,23 @@ class Product:
             quantity (int): Number of items in stock (must be non-negative).
 
         Raises:
+            TypeError: If any argument has the wrong type.
             ValueError: If name is empty or price/quantity is negative.
         """
+        if not isinstance(name, str):
+            raise TypeError("Name must be a string.")
+        if not isinstance(price, (int, float)):
+            raise TypeError("Price must be a number.")
+        if not isinstance(quantity, int):
+            raise TypeError("Quantity must be an integer.")
+
         if not name or price < 0 or quantity < 0:
             raise ValueError("Invalid product parameters.")
+
         self._name = name
-        self._price = price
+        self._price = float(price)
         self._quantity = quantity
-        self._active = True
+        self._active = quantity > 0  # Active only if quantity is not zero
 
     def get_quantity(self) -> int:
         """
